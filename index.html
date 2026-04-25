@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBBS Rapid Revision — Study Smart, Score Big</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f2c;
+    --blue: #1a3a8f;
+    --electric: #2563ff;
+    --cyan: #00d4ff;
+    --gold: #f59e0b;
+    --white: #f8faff;
+    --grey: #8892a4;
+    --card-bg: #0f1635;
+    --card-border: #1e2d5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── ANIMATED BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(37,99,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,212,255,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 60% 10%, rgba(245,158,11,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── FLOATING PARTICLES ─── */
+  .particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--cyan);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 15, 44, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(37, 99, 255, 0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    color: var(--white) !important;
+    padding: 9px 22px;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    transition: opacity 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37, 99, 255, 0.12);
+    border: 1px solid rgba(37, 99, 255, 0.3);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 0.82rem;
+    color: var(--cyan);
+    font-weight: 500;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: var(--cyan);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease 0.1s both;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 .gradient-text {
+    background: linear-gradient(135deg, var(--electric), var(--cyan), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--grey);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s ease 0.3s both;
+    margin-bottom: 64px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 32px rgba(37, 99, 255, 0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37, 99, 255, 0.5);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* ─── STATS ─── */
+  .stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s ease 0.4s both;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--grey);
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    color: var(--grey);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 500px;
+    font-weight: 300;
+    margin-bottom: 56px;
+  }
+
+  /* ─── PRODUCTS ─── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--electric), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(37, 99, 255, 0.4);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .product-card:hover::before { opacity: 1; }
+
+  .product-card.featured {
+    border-color: rgba(37, 99, 255, 0.5);
+    background: linear-gradient(135deg, #0f1635, #0d1840);
+  }
+
+  .product-card.featured::before { opacity: 1; }
+
+  .featured-badge {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: linear-gradient(135deg, var(--gold), #f97316);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .product-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .icon-blue { background: rgba(37, 99, 255, 0.15); }
+  .icon-cyan { background: rgba(0, 212, 255, 0.15); }
+  .icon-gold { background: rgba(245, 158, 11, 0.15); }
+
+  .product-subject {
+    font-size: 0.75rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .product-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .product-desc {
+    color: var(--grey);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .product-features {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+
+  .product-features li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--grey);
+    padding: 4px 0;
+  }
+
+  .product-features li::before {
+    content: '✓';
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--card-border);
+  }
+
+  .price-block {}
+
+  .price-original {
+    font-size: 0.8rem;
+    color: var(--grey);
+    text-decoration: line-through;
+  }
+
+  .price-current {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .buy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .buy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 255, 0.4);
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section {
+    background: linear-gradient(135deg, rgba(15, 22, 53, 0.8), rgba(13, 24, 64, 0.8));
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    padding: 60px;
+    max-width: 1100px;
+    margin: 0 auto 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-top: 48px;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-number {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(37, 99, 255, 0.3);
+  }
+
+  .step h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    color: var(--grey);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ─── WHY US ─── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(37, 99, 255, 0.3);
+  }
+
+  .feature-emoji {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    color: var(--grey);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--card-bg);
+    border: 1px solid rgba(37, 99, 255, 0.3);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+
+  @keyframes modalIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: var(--white);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.15); }
+
+  .modal h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .modal-product-name {
+    color: var(--cyan);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .modal-price-display {
+    background: rgba(37, 99, 255, 0.1);
+    border: 1px solid rgba(37, 99, 255, 0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-price-label { color: var(--grey); font-size: 0.85rem; }
+
+  .modal-price-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .payment-steps { margin-bottom: 24px; }
+
+  .payment-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .payment-step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-text { font-size: 0.88rem; line-height: 1.5; }
+  .step-text strong { color: var(--cyan); }
+  .step-text span { color: var(--grey); font-size: 0.8rem; display: block; margin-top: 2px; }
+
+  .upi-id-box {
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px dashed rgba(0, 212, 255, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: monospace;
+    font-size: 1rem;
+    color: var(--cyan);
+    text-align: center;
+    margin: 8px 0;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .upi-id-box:hover { background: rgba(0, 212, 255, 0.15); }
+
+  .copy-hint {
+    font-size: 0.7rem;
+    color: var(--grey);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .telegram-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, #0088cc, #00a8e8);
+    color: white;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .telegram-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* ─── CONTACT / TELEGRAM ─── */
+  .contact-section {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 80px 24px 100px;
+  }
+
+  .contact-card {
+    background: linear-gradient(135deg, rgba(37, 99, 255, 0.12), rgba(0, 212, 255, 0.08));
+    border: 1px solid rgba(37, 99, 255, 0.25);
+    border-radius: 28px;
+    padding: 60px 40px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .contact-card h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .contact-card p {
+    color: var(--grey);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px 24px;
+    border-top: 1px solid var(--card-border);
+    color: var(--grey);
+    font-size: 0.82rem;
+  }
+
+  footer span {
+    background: linear-gradient(135deg, var(--electric), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--card-bg);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: var(--cyan);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .how-section { padding: 40px 24px; }
+    .hero h1 { font-size: 2.4rem; }
+    .stats { gap: 28px; }
+    .modal { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Particles -->
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">🩺</div>
+    <span>MBBS Rapid</span>&nbsp;Revision
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Join Telegram</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Made by an MBBS Student — For MBBS Students
+  </div>
+
+  <h1>
+    Study Smart.<br>
+    <span class="gradient-text">Score Big. 🏆</span>
+  </h1>
+
+  <p>
+    Exam-focused notes, catchy mnemonics aur flowcharts — jo actually yaad rahein!
+    2nd Year MBBS ke liye specially designed. Sirf important questions. Zero bakwaas.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="#products" class="btn-primary">
+      📚 PDFs Dekho
+    </a>
+    <a href="#how" class="btn-secondary">
+      Kaise Kaam Karta Hai →
+    </a>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">2+</div>
+      <div class="stat-label">PDFs Ready</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Exam Focused</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">₹49</div>
+      <div class="stat-label">Launch Price</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">2nd Yr</div>
+      <div class="stat-label">MBBS Syllabus</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="fade-in">
+    <div class="section-label">Our Products</div>
+    <h2 class="section-title">MBBS Rapid Revision Collection 📚</h2>
+    <p class="section-desc">Har PDF mein — important questions, key answer points, catchy mnemonics aur diagram tips. Sab ek jagah!</p>
+  </div>
+
+  <div class="products-grid fade-in">
+
+    <!-- Product 1 -->
+    <div class="product-card featured">
+      <div class="featured-badge">🔥 New</div>
+      <div class="product-icon icon-blue">💊</div>
+      <div class="product-subject">Pharmacology</div>
+      <h3 class="product-title">Cardiovascular Drugs — Complete Guide</h3>
+      <p class="product-desc">ACE inhibitors se lekar Antihypertensives tak — sab covered. Funny mnemonics jo exam tak yaad rahein!</p>
+      <ul class="product-features">
+        <li>14 High Yield Topics (SN + LAQ)</li>
+        <li>Catchy mnemonics for every topic</li>
+        <li>Comparison tables</li>
+        <li>Key exam tips + warnings</li>
+        <li>Quick revision page</li>
+      </ul>
+      <div class="product-footer">
+        <div class="price-block">
+          <div class="price-original">₹99</div>
+          <div class="price-current">₹49</div>
+        </div>
+        <button class="buy-btn" onclick="openModal('Pharmacology — Cardiovascular Drugs', '49')">
+          Buy Now →
+        </button>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card featured">
+      <div class="featured-badge">🔥 New</div>
+      <div class="product-icon icon-cyan">🫘</div>
+      <div class="product-subject">Pathology</div>
+      <h3 class="product-title">Renal System — Complete Guide</h3>
+      <p class="product-desc">Nephrotic se RPGN tak — university pattern ke saath. Flowcharts, diagram tips aur catchy mnemonics!</p>
+      <ul class="product-features">
+        <li>8 High Yield Topics (SN + LAQ)</li>
+        <li>Pathogenesis flowcharts</li>
+        <li>Diagram tips for every topic</li>
+        <li>Catchy funny mnemonics</li>
+        <li>Mnemonic quick revision page</li>
+      </ul>
+      <div class="product-footer">
+        <div class="price-block">
+          <div class="price-original">₹99</div>
+          <div class="price-current">₹49</div>
+        </div>
+        <button class="buy-btn" onclick="openModal('Pathology — Renal System', '49')">
+          Buy Now →
+        </button>
+      </div>
+    </div>
+
+    <!-- Coming Soon -->
+    <div class="product-card" style="opacity:0.6; pointer-events:none;">
+      <div class="product-icon icon-gold">🦠</div>
+      <div class="product-subject">Microbiology</div>
+      <h3 class="product-title">Coming Soon — Microbiology Rapid Revision</h3>
+      <p class="product-desc">Jald aa raha hai! Telegram join karo — launch hote hi notification milega.</p>
+      <ul class="product-features">
+        <li>University pattern questions</li>
+        <li>Mnemonics + flowcharts</li>
+        <li>Diagram tips included</li>
+      </ul>
+      <div class="product-footer">
+        <div class="price-block">
+          <div class="price-current" style="font-size:1rem; color: var(--grey); -webkit-text-fill-color: var(--grey);">Coming Soon</div>
+        </div>
+        <button class="buy-btn" style="background: var(--card-border); box-shadow:none;">
+          Notify Me
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-section fade-in" id="how">
+  <div class="section-label">Process</div>
+  <h2 class="section-title">Kaise Milega Tumhara PDF? 📥</h2>
+  <p class="section-desc" style="margin-bottom:0;">3 simple steps — aur PDF tumhare paas!</p>
+
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Buy Now Click Karo</h3>
+      <p>Jo PDF chahiye uska "Buy Now" button dabao. Price aur details dikhegi.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>UPI se Payment Karo</h3>
+      <p>Humara UPI ID copy karo. GPay, PhonePe, Paytm — kuch bhi chalega. ₹49 bhejo.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Screenshot Telegram pe Bhejo</h3>
+      <p>Payment screenshot hamare Telegram pe bhejo. 15 minute mein PDF mil jaayega!</p>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Padho aur Pass Ho! 🏆</h3>
+      <p>PDF download karo, mnemonics padho, exam mein dhamaka karo!</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="fade-in">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">Kyun Different Hain Hum? 🎯</h2>
+    <p class="section-desc">Generic notes nahi — actual exam-winning strategy.</p>
+  </div>
+
+  <div class="features-grid fade-in">
+    <div class="feature-card">
+      <span class="feature-emoji">🧠</span>
+      <h3>Catchy Mnemonics</h3>
+      <p>Boring mnemonics nahi — funny, relatable tricks jo exam ke 2 din baad bhi yaad rahein!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">📊</span>
+      <h3>Flowcharts & Diagrams</h3>
+      <p>Har pathogenesis ka flowchart. Diagram tips bhi — exactly kya draw karna hai exam mein!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">🎯</span>
+      <h3>University Pattern</h3>
+      <p>Past paper pattern follow karta hai — sirf woh topics jo actually exam mein aate hain!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">⭐</span>
+      <h3>Star Ratings</h3>
+      <p>Har topic ko importance star milte hain — pata chale kya zyada important hai!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">👨‍⚕️</span>
+      <h3>By an MBBS Student</h3>
+      <p>Kisi doctor ne nahi — ek MBBS student ne banaya jo khud ye exams de raha hai!</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-emoji">💰</span>
+      <h3>Sirf ₹49</h3>
+      <p>Ek chai aur samose ki kimat mein — puri subject ka cheat code! Launch price limited time ke liye!</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section fade-in" id="contact">
+  <div class="contact-card">
+    <h2>Telegram Join Karo! 📱</h2>
+    <p>
+      Free tips, mnemonics aur updates ke liye hamare Telegram channel join karo.
+      Naya PDF launch hote hi sabse pehle notification tumhe milega!
+    </p>
+    <a href="https://t.me/mbbsrapidrevise" target="_blank" class="telegram-btn">
+      ✈️ Telegram Channel Join Karo — Free!
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with 🩺 by <span>MBBS Rapid Revision</span> — An MBBS Student from India</p>
+  <p style="margin-top:8px;">Study Smart. Score Big. Pass with Flying Colors! 🏆</p>
+</footer>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Almost There! 🎉</h2>
+    <p class="modal-product-name" id="modal-product-name">Pharmacology — Cardiovascular Drugs</p>
+
+    <div class="modal-price-display">
+      <span class="modal-price-label">Launch Price (Limited!)</span>
+      <span class="modal-price-amount">₹<span id="modal-price">49</span></span>
+    </div>
+
+    <div class="payment-steps">
+      <div class="payment-step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Niche wala UPI ID copy karo</strong>
+          <span>GPay, PhonePe, Paytm — kuch bhi chalega!</span>
+        </div>
+      </div>
+      <div class="payment-step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>₹49 bhejo is UPI ID pe</strong>
+          <span>Note mein likho: PDF ka naam</span>
+        </div>
+      </div>
+      <div class="payment-step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Screenshot Telegram pe bhejo</strong>
+          <span>15 minute mein PDF mil jaayega! ⚡</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="upi-id-box" onclick="copyUPI()" id="upi-box">
+      oneaboveall3406@okicici
+    </div>
+    <p class="copy-hint">👆 Tap to copy UPI ID</p>
+
+    <a href="https://t.me/mbbsrapidrevise" target="_blank" class="telegram-btn">
+      ✈️ Screenshot Bhejo — Telegram pe
+    </a>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ UPI ID copied!</div>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+    p.style.opacity = (0.2 + Math.random() * 0.4).toString();
+    container.appendChild(p);
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Modal
+  function openModal(productName, price) {
+    document.getElementById('modal-product-name').textContent = productName;
+    document.getElementById('modal-price').textContent = price;
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  // Copy UPI
+  function copyUPI() {
+    const upi = 'oneaboveall3406@okicici';
+    navigator.clipboard.writeText(upi).then(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    });
+  }
+
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
